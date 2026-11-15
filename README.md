@@ -2,15 +2,15 @@
 
 > **Status, 10 November 2026.** This corpus was published with speedrunpapi versions that judged circuits by matching source patterns. Those versions did not analyse the constraint system, and the timing comparison under `replay22/` measured that lookup against a solver. **The comparison is withdrawn.**
 >
-> The fixtures themselves are sound test material: each was written with a known answer. [speedrunpapi 0.7.1](https://github.com/lmtlssss/speedrunpapi), which compiles each circuit with circom and analyses the R1CS for output determinism, reaches the verdict listed below for all 18, with a derivation an independent checker replays or two checked witnesses. Reproduce with circom 2.x installed:
+> The fixtures themselves are sound test material: each was written with a known answer. [speedrunpapi 0.7.2](https://github.com/lmtlssss/speedrunpapi), which compiles each circuit with circom and analyses the R1CS for output determinism, reaches the verdict listed below for all 18, with a derivation an independent checker replays or two checked witnesses. Reproduce with circom 2.x installed:
 >
 > ```sh
-> npx --yes speedrunpapi@0.7.1 scan carry/modsum_safe_n4.circom -l lib/circomlib/circuits
+> npx --yes speedrunpapi@0.7.2 scan carry/modsum_safe_n4.circom -l lib/circomlib/circuits
 > ```
 >
 > The `speedrunpapi@0.3.2` commands further down, and everything in `replay22/`, are kept only as a record of what was published.
 
-The 18 original Colony Circom fixtures in the 22-case G1 replay are published here, byte-for-byte from the measured source corpus. The other three cases are upstream Picus benchmark circuits. Each clip's original `speedrunpapi@0.3.2` command remains reproducible. The current CLI is `0.5.1`.
+The 18 original Colony Circom fixtures in the 22-case G1 replay are published here, byte-for-byte from the measured source corpus. The other four cases are three upstream Picus benchmark circuits and the circomlib SHA-256 compression benchmark. Each clip's original `speedrunpapi@0.3.2` command remains reproducible. The current CLI is `0.7.2`.
 
 Clone once:
 
@@ -47,4 +47,4 @@ The 18 circuits use standard relative Circom includes. The required `lib/circoml
 
 The other four G1 sources are three publicly maintained Picus benchmarks (`test_bigadd_15.circom`, `test_bigadd_23.circom`, `BinSum@binsum.circom`) and the circomlib SHA-256 compression benchmark. All four and their include files are pinned under `replay22/upstream/`. The [22-case reproducible replay](replay22/README.md) adds circomlib SHA-256 compression, includes the full upstream licenses, and produces a measured JSON leaderboard from the pinned CLI. The live [Colony leaderboard](https://colony.technology/leaderboard) and [checker](https://colony.technology/checker) display the published evidence.
 
-To repeat a source-bound check with today's published package, substitute `speedrunpapi@0.5.1` in the same command. The source paths are unchanged.
+To repeat a source-bound check with today's published package, substitute `speedrunpapi@0.7.2` in the same command. The source paths are unchanged.
