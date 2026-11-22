@@ -1,4 +1,4 @@
-# Colony G1 · public circuit fixtures
+# colony G1 · public circuit fixtures
 
 > **Status, 10 November 2026.** This corpus was published with speedrunpapi versions that judged circuits by matching source patterns. Those versions did not analyse the constraint system, and the timing comparison under `replay22/` measured that lookup against a solver. **The comparison is withdrawn.**
 >
@@ -10,7 +10,7 @@
 >
 > The `speedrunpapi@0.3.2` commands further down, and everything in `replay22/`, are kept only as a record of what was published.
 
-The 18 original Colony Circom fixtures in the 22-case G1 replay are published here, byte-for-byte from the measured source corpus. The other four cases are three upstream Picus benchmark circuits and the circomlib SHA-256 compression benchmark. Each clip's original `speedrunpapi@0.3.2` command remains reproducible. The current CLI is `0.7.2`.
+The 18 original colony Circom fixtures in the 22-case G1 replay are published here, byte-for-byte from the measured source corpus. The other four cases are three upstream Picus benchmark circuits and the circomlib SHA-256 compression benchmark. Each clip's original `speedrunpapi@0.3.2` command remains reproducible. The current CLI is `0.7.2`.
 
 Clone once:
 
@@ -43,8 +43,8 @@ For a single case, download the linked .circom file, then scan its local pathnam
 | [`shared_input_no_bitify_m3_w8`](buggy/shared_input_no_bitify_m3_w8.circom) | Broken | `buggy/shared_input_no_bitify_m3_w8.circom` |
 | [`cascade3_no_bitify_n4`](buggy/cascade3_no_bitify_n4.circom) | Broken | `buggy/cascade3_no_bitify_n4.circom` |
 
-The 18 circuits use standard relative Circom includes. The required `lib/circomlib/` files are vendored with their original notices and license files so a Circom compiler can follow the imports. These are third-party sources by 0KIMS/circomlib, separate from the original Colony fixtures.
+The 18 circuits use standard relative Circom includes. The required `lib/circomlib/` files are vendored with their original notices and license files so a Circom compiler can follow the imports. These are third-party sources by 0KIMS/circomlib, separate from the original colony fixtures.
 
-The other four G1 sources are three publicly maintained Picus benchmarks (`test_bigadd_15.circom`, `test_bigadd_23.circom`, `BinSum@binsum.circom`) and the circomlib SHA-256 compression benchmark. All four and their include files are pinned under `replay22/upstream/`. The [22-case reproducible replay](replay22/README.md) adds circomlib SHA-256 compression, includes the full upstream licenses, and produces a measured JSON leaderboard from the pinned CLI. The live [Colony leaderboard](https://colony.technology/leaderboard) and [checker](https://colony.technology/checker) display the published evidence.
+The other four G1 sources are three publicly maintained Picus benchmarks (`test_bigadd_15.circom`, `test_bigadd_23.circom`, `BinSum@binsum.circom`) and the circomlib SHA-256 compression benchmark. All four and their include files are pinned under `replay22/upstream/`. The [22-case reproducible replay](replay22/README.md) adds circomlib SHA-256 compression, includes the full upstream licenses, and produces a measured JSON leaderboard from the pinned CLI. The live [colony leaderboard](https://colony.technology/leaderboard) and [checker](https://colony.technology/checker) display the published evidence.
 
 To repeat a source-bound check with today's published package, substitute `speedrunpapi@0.7.2` in the same command. The source paths are unchanged.
