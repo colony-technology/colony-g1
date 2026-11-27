@@ -1,50 +1,64 @@
-# colony G1 · public circuit fixtures
+# colony g1
 
-> **Status, 10 November 2026.** This corpus was published with speedrunpapi versions that judged circuits by matching source patterns. Those versions did not analyse the constraint system, and the timing comparison under `replay22/` measured that lookup against a solver. **The comparison is withdrawn.**
->
-> The fixtures themselves are sound test material: each was written with a known answer. [speedrunpapi 0.7.2](https://github.com/lmtlssss/speedrunpapi), which compiles each circuit with circom and analyses the R1CS for output determinism, reaches the verdict listed below for all 18, with a derivation an independent checker replays or two checked witnesses. Reproduce with circom 2.x installed:
->
-> ```sh
-> npx --yes speedrunpapi@0.7.2 scan carry/modsum_safe_n4.circom -l lib/circomlib/circuits
-> ```
->
-> The `speedrunpapi@0.3.2` commands further down, and everything in `replay22/`, are kept only as a record of what was published.
+public circom circuit fixtures for [colony.technology](https://colony.technology).
 
-The 18 original colony Circom fixtures in the 22-case G1 replay are published here, byte-for-byte from the measured source corpus. The other four cases are three upstream Picus benchmark circuits and the circomlib SHA-256 compression benchmark. Each clip's original `speedrunpapi@0.3.2` command remains reproducible. The current CLI is `0.7.2`.
+```text
+COLONY G1
+──────────────────────────────────────────────────────────────
 
-Clone once:
-
-```sh
-git clone https://github.com/lmtlssss/colony-g1.git
-cd colony-g1
-npx --yes speedrunpapi@0.3.2 scan carry/modsum_safe_n4.circom --json
+18 colony fixtures  ──►  circom 2.x  ──►  speedrunpapi@0.7.6
+                                              │
+                                              ├─ Certified (exit 0)
+                                              └─ Broken    (exit 2)
 ```
 
-For a single case, download the linked .circom file, then scan its local pathname. `Certified` returns exit code 0; `Broken` returns 2 by design. The scope and original result are displayed in the CLI output. A Broken verdict can be a deliberate negative fixture, as indicated below.
+## status
 
-| Circuit | Expected verdict | Rerun file |
-| --- | --- | --- |
-| [`modsum_safe_n4`](carry/modsum_safe_n4.circom) | Certified | `carry/modsum_safe_n4.circom` |
-| [`modsum_safe_n8`](carry/modsum_safe_n8.circom) | Certified | `carry/modsum_safe_n8.circom` |
-| [`modsum_safe_n16`](carry/modsum_safe_n16.circom) | Certified | `carry/modsum_safe_n16.circom` |
-| [`modsum3_safe_n4`](carry/modsum3_safe_n4.circom) | Certified | `carry/modsum3_safe_n4.circom` |
-| [`full_adder_bits`](carry/full_adder_bits.circom) | Certified | `carry/full_adder_bits.circom` |
-| [`shared_input_parallel_m3_w8`](carry/shared_input_parallel_m3_w8.circom) | Certified | `carry/shared_input_parallel_m3_w8.circom` |
-| [`cascade3_safe_n4`](carry/cascade3_safe_n4.circom) | Certified | `carry/cascade3_safe_n4.circom` |
-| [`limb_add_safe_n4_k2`](limb/limb_add_safe_n4_k2.circom) | Certified | `limb/limb_add_safe_n4_k2.circom` |
-| [`limb_add_safe_n4_k4`](limb/limb_add_safe_n4_k4.circom) | Certified | `limb/limb_add_safe_n4_k4.circom` |
-| [`limb_add_safe_n8_k4`](limb/limb_add_safe_n8_k4.circom) | Certified | `limb/limb_add_safe_n8_k4.circom` |
-| [`u4_add_safe_k8`](bitvm_model/u4_add_safe_k8.circom) | Certified | `bitvm_model/u4_add_safe_k8.circom` |
-| [`modsum_no_bitify_n4`](buggy/modsum_no_bitify_n4.circom) | Broken | `buggy/modsum_no_bitify_n4.circom` |
-| [`modsum_carry_not_bit_n4`](buggy/modsum_carry_not_bit_n4.circom) | Broken | `buggy/modsum_carry_not_bit_n4.circom` |
-| [`full_adder_no_bit_checks`](buggy/full_adder_no_bit_checks.circom) | Certified | `buggy/full_adder_no_bit_checks.circom` |
-| [`limb_add_missing_range_n4_k2`](buggy/limb_add_missing_range_n4_k2.circom) | Broken | `buggy/limb_add_missing_range_n4_k2.circom` |
-| [`u4_add_buggy_k8`](bitvm_model/u4_add_buggy_k8.circom) | Broken | `bitvm_model/u4_add_buggy_k8.circom` |
-| [`shared_input_no_bitify_m3_w8`](buggy/shared_input_no_bitify_m3_w8.circom) | Broken | `buggy/shared_input_no_bitify_m3_w8.circom` |
-| [`cascade3_no_bitify_n4`](buggy/cascade3_no_bitify_n4.circom) | Broken | `buggy/cascade3_no_bitify_n4.circom` |
+status, 10 november 2026: this corpus was originally published with earlier speedrunpapi builds that matched source patterns instead of analysing the compiled constraint system. the timing comparison under `replay22/` measured that pattern lookup against a solver and is withdrawn.
 
-The 18 circuits use standard relative Circom includes. The required `lib/circomlib/` files are vendored with their original notices and license files so a Circom compiler can follow the imports. These are third-party sources by 0KIMS/circomlib, separate from the original colony fixtures.
+the fixtures themselves are sound test material with known ground truth. [speedrunpapi 0.7.6](https://github.com/colony-technology/speedrunpapi) compiles each circuit with circom, analyses the r1cs for output determinism, and returns the exact verdict below for all 18 fixtures with an independently replayable derivation or two checked witnesses.
 
-The other four G1 sources are three publicly maintained Picus benchmarks (`test_bigadd_15.circom`, `test_bigadd_23.circom`, `BinSum@binsum.circom`) and the circomlib SHA-256 compression benchmark. All four and their include files are pinned under `replay22/upstream/`. The [22-case reproducible replay](replay22/README.md) adds circomlib SHA-256 compression, includes the full upstream licenses, and produces a measured JSON leaderboard from the pinned CLI. The live [colony leaderboard](https://colony.technology/leaderboard) and [checker](https://colony.technology/checker) display the published evidence.
+`speedrunpapi@0.3.2` commands and files under `replay22/` stay only as an archive of what was originally published.
 
-To repeat a source-bound check with today's published package, substitute `speedrunpapi@0.7.2` in the same command. The source paths are unchanged.
+## run
+
+requires circom 2.x and node.js 20+.
+
+```bash
+git clone https://github.com/colony-technology/colony-g1.git
+cd colony-g1
+npx --yes speedrunpapi@0.7.6 scan carry/modsum_safe_n4.circom -l lib/circomlib/circuits
+```
+
+exit codes: `0` when `Certified`, `2` when `Broken` (including deliberate negative fixtures).
+
+## fixtures
+
+```text
+circuit                          verdict     file
+───────────────────────────────────────────────────────────────────────────────────────
+modsum_safe_n4                   Certified   carry/modsum_safe_n4.circom
+modsum_safe_n8                   Certified   carry/modsum_safe_n8.circom
+modsum_safe_n16                  Certified   carry/modsum_safe_n16.circom
+modsum3_safe_n4                  Certified   carry/modsum3_safe_n4.circom
+full_adder_bits                  Certified   carry/full_adder_bits.circom
+shared_input_parallel_m3_w8      Certified   carry/shared_input_parallel_m3_w8.circom
+cascade3_safe_n4                 Certified   carry/cascade3_safe_n4.circom
+limb_add_safe_n4_k2              Certified   limb/limb_add_safe_n4_k2.circom
+limb_add_safe_n4_k4              Certified   limb/limb_add_safe_n4_k4.circom
+limb_add_safe_n8_k4              Certified   limb/limb_add_safe_n8_k4.circom
+u4_add_safe_k8                   Certified   bitvm_model/u4_add_safe_k8.circom
+full_adder_no_bit_checks         Certified   buggy/full_adder_no_bit_checks.circom
+modsum_no_bitify_n4              Broken      buggy/modsum_no_bitify_n4.circom
+modsum_carry_not_bit_n4          Broken      buggy/modsum_carry_not_bit_n4.circom
+limb_add_missing_range_n4_k2     Broken      buggy/limb_add_missing_range_n4_k2.circom
+u4_add_buggy_k8                  Broken      bitvm_model/u4_add_buggy_k8.circom
+shared_input_no_bitify_m3_w8     Broken      buggy/shared_input_no_bitify_m3_w8.circom
+cascade3_no_bitify_n4            Broken      buggy/cascade3_no_bitify_n4.circom
+```
+
+## upstream
+
+the 18 circuits use standard relative circom includes. required `lib/circomlib/` files are vendored with their original upstream notices and licenses from `0KIMS/circomlib`, separate from the original colony fixtures.
+
+the four additional g1 cases (`test_bigadd_15.circom`, `test_bigadd_23.circom`, `BinSum@binsum.circom`, and circomlib sha-256 compression) are pinned under `replay22/upstream/`. see [replay22/README.md](replay22/README.md), [colony.technology/leaderboard](https://colony.technology/leaderboard), and [colony.technology/checker](https://colony.technology/checker).
